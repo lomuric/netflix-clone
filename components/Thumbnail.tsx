@@ -1,15 +1,25 @@
 import Image from "next/image";
+import { useRecoilState } from "recoil";
+import { modalState, movieState } from "../atoms/ModalAtom";
 import { Movie } from "../typings";
 
 interface Props {
-    //When using Firebase
-  //movie: Movie; | CocumentData
+  //When using Firebase
+  //movie: Movie; | DocumentData
   movie: Movie;
 }
 
 function Thumbnail({ movie }: Props) {
+  const [showModal, setShowModal] = useRecoilState(modalState);
+  const [currentMovie, setCurrentMovie] = useRecoilState(movieState);
   return (
-    <div className="relative h-28 min-w-[180px] cursor-pointer transition duration-200 easeout md:h-36 md:min-w-[260px] md:hover:scale-105">
+    <div
+      className="relative h-28 min-w-[180px] cursor-pointer transition duration-200 easeout md:h-36 md:min-w-[260px] md:hover:scale-105"
+      onClick={() => {
+        setCurrentMovie(movie);
+        setShowModal(true);
+      }}
+    >
       <Image
         src={`https://image.tmdb.org/t/p/w500${
           movie.backdrop_path || movie.poster_path

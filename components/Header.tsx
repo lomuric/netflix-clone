@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const { logout } = useAuth()
+
 
   useEffect(() => {
     const handleScroll = () => {
